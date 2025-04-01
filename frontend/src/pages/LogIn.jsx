@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSucess } from "../utils";
@@ -6,16 +6,12 @@ import { handleError, handleSucess } from "../utils";
 function LogIn() {
   const [LogInData, setLogInData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    // const { name, value } = e.target;
-    // const copysignupData = { ...signupData };
-    // copysignupData[name] = value;
-    // setSignupData(copysignupData);
     const { id, value } = e.target;
     setLogInData((prevData) => ({
       ...prevData,
@@ -40,22 +36,20 @@ function LogIn() {
         body: JSON.stringify(LogInData),
       });
       const data = await response.json();
-      const { success, message, error, name } = data;
+      const { success, message, error, name, userId } = data;
       if (success) {
         handleSucess(message);
+        localStorage.setItem("userId", userId);
         localStorage.setItem("loggedIn user", name);
         setTimeout(() => {
           navigate("/home");
         }, 1000);
-      }else if (error) {
+      } else if (error) {
         const details = error?.details[0].message;
         handleError(details);
-
-      }else if (!success) {
+      } else if (!success) {
         handleError(message);
       }
-
-      // If the user is successfully signed up, redirect to the login page
     } catch (error) {
       handleError(error.message);
     }
@@ -65,7 +59,6 @@ function LogIn() {
     <div className="container">
       <h1>LogIn</h1>
       <form onSubmit={handleLogIn}>
-       
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
@@ -101,4 +94,3 @@ function LogIn() {
 }
 
 export default LogIn;
-

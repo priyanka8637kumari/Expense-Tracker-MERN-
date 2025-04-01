@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import userRouter from './routes/userRouter.js';
+import transactionRouter from './routes/transactionRouter.js';
 
 
 const app = express();
@@ -16,6 +17,7 @@ connectDB();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/users', userRouter);
+app.use('/api/transactions', transactionRouter);
 
 
 app.get('/ping', (req, res) => {

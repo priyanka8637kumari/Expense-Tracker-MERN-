@@ -1,21 +1,41 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleSucess } from "../utils";
+import TransactionList from "./TransactionList";
+import TransactionForm from "./TransactionForm";
+import TransactionSummary from "./TransactionSummary";
 
 function Home() {
   // const name = localStorage.getItem("loggedIn user");
   const [loggedInUser, setLoggedInUser] = useState("");
   const [transactions, setTransactions] = useState([]);
+  const [expenseAmt, setExpenseAmt] = useState(0);
+  const [incomeAmt, setIncomeAmt] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const name = localStorage.getItem("loggedIn user");
     setLoggedInUser(name);
-  });
+  }, []);
+
+  useEffect(() => {
+    const amounts = transactions.map((transaction) => transaction.amount);
+    const income = amounts
+      .filter((amount) => amount > 0)
+      .reduce((acc, item) => (acc += item), 0);
+    setIncomeAmt(income);
+    const expense = amounts
+      .filter((amount) => amount < 0)
+      .reduce((acc, item) => (acc += item), 0) * -1;
+    setExpenseAmt(expense);
+   
+  }, [transactions]);
 
   const handleLogOut = () => {
     localStorage.removeItem("loggedIn user");
+    localStorage.removeItem("userId");
+
     handleSucess("Logged out successfully!");
     setTimeout(() => {
       navigate("/login");
@@ -24,33 +44,86 @@ function Home() {
 
   const fetchTransactions = async () => {
     try {
-    const url = "http://localhost:3001/api/transactions";
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
-    setTransactions(data);
+      const userId = localStorage.getItem("userId");
+      const url = "http://localhost:5001/api/transactions/" + userId;
+      const response = await fetch(url);
+      const data = await response.json();
+      // console.log(data);
+      setTransactions(data.transactions);
+      // console.log("transactions on home page", data.transactions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  } catch (error) {
-    console.log(error);
-  }
-};
+  const addTransaction = async (transaction) => {
+    try {
+      const userId = localStorage.getItem("userId");
+      const url = "http://localhost:5001/api/transactions";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, ...transaction }),
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        handleSucess(data.message);
+        setTransactions([...transactions, data.transaction]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteTransaction = async (transactionId) => {
+    try {
+      const userId = localStorage.getItem("userId");
+      const url = "http://localhost:5001/api/transactions";
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, transactionId }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        handleSucess(data.message);
+        const newTransactions = transactions.filter(
+          (transaction) => transaction._id !== transactionId
+        );
+        setTransactions(newTransactions);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchTransactions();
-    }, []);
+  }, []);
   return (
     <div>
-      <h1>Welcome {loggedInUser}</h1>
-      <button onClick={handleLogOut}>Logout</button>
+      <div>
+        {" "}
+        <h1>Welcome {loggedInUser}</h1>
+        <button onClick={handleLogOut}>Logout</button>
+        <TransactionSummary 
+        incomeAmt={incomeAmt}
+        expenseAmt={expenseAmt}
+        />
         <h2>Transactions</h2>
-        <div>
-            {transactions.map((transaction) => (
-                <div key={transaction._id}>
-               <span>{transaction.text} : {transaction.amount}</span>
-                </div>
-            ))}
-        </div>
-        <ToastContainer />
+      </div>
+      <TransactionForm addTransaction={addTransaction} />
+      <TransactionList
+        transactions={transactions}
+        deleteTransaction={deleteTransaction}
+      />
+
+      <ToastContainer />
     </div>
   );
 }

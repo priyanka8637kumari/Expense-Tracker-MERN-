@@ -16,6 +16,26 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    transactions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Transactions'
+        }
+        // {
+        //     text: {
+        //         type: String,
+        //         required: true,
+        //     },
+        //     amount: {
+        //         type: Number,
+        //         required: true,
+        //     },
+        //     createdOn: {
+        //         type: Date,
+        //         default: Date.now,
+        //     }
+        // }
+    ]
     });
 
 const userModel = mongoose.model('Users', userSchema);
