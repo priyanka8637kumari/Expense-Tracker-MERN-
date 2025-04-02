@@ -28,32 +28,32 @@ function TransactionForm({addTransaction}) {
     };
 
   return (
-    <div className="container">
-      <h1>Add your Transaction</h1>
+    <div class="mx-auto p-6 bg-white rounded-lg">
+      <p class="text-2xl font-bold mb-6">Add your Transaction</p>
       <form onSubmit={handleTransaction}>
-        <div className="form-group">
-          <label htmlFor="text">Category</label>
+        <div class="mb-4">
+          <label htmlFor="text" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
           <input
             onChange={handleChange}
             type="text"
             id="text"
-            className="form-control"
+             class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter category"
             value={transactionData.text}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="amount">amount</label>
+          <label htmlFor="amount" class="block text-sm font-medium text-gray-700 mb-2">amount</label>
           <input
             onChange={handleChange}
             type="amount"
             id="amount"
-            className="form-control"
+             class="form-control w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter amount"
             value={transactionData.amount}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" class="bg-blue-500 mt-4 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Add Transaction
         </button>
        

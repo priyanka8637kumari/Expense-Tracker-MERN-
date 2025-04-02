@@ -5,6 +5,7 @@ import { handleSucess } from "../utils";
 import TransactionList from "./TransactionList";
 import TransactionForm from "./TransactionForm";
 import TransactionSummary from "./TransactionSummary";
+import profileIcon from "../assets/profileIcon.png";
 
 function Home() {
   // const name = localStorage.getItem("loggedIn user");
@@ -25,11 +26,11 @@ function Home() {
       .filter((amount) => amount > 0)
       .reduce((acc, item) => (acc += item), 0);
     setIncomeAmt(income);
-    const expense = amounts
-      .filter((amount) => amount < 0)
-      .reduce((acc, item) => (acc += item), 0) * -1;
+    const expense =
+      amounts
+        .filter((amount) => amount < 0)
+        .reduce((acc, item) => (acc += item), 0) * -1;
     setExpenseAmt(expense);
-   
   }, [transactions]);
 
   const handleLogOut = () => {
@@ -106,25 +107,59 @@ function Home() {
     fetchTransactions();
   }, []);
   return (
-    <div>
-      <div>
-        {" "}
-        <h1>Welcome {loggedInUser}</h1>
-        <button onClick={handleLogOut}>Logout</button>
-        <TransactionSummary 
-        incomeAmt={incomeAmt}
-        expenseAmt={expenseAmt}
-        />
-        <h2>Transactions</h2>
+    <div class="grid grid-cols-[250px_auto_400px] gap-5 p-5 bg-gray-500">
+      <nav class="bg-white p-5 rounded-lg flex flex-col items-center shadow-md shadow-gray-300">
+        <div class="flex flex-row">
+          <img
+            src={profileIcon}
+            alt="User avatar of Mike"
+            class="w-15 h-15 rounded-full"
+          />
+          <div>
+            <h1>Welcome {loggedInUser}</h1>
+            <p>My Money</p>
+          </div>
+        </div>
+        <button
+          onClick={handleLogOut}
+          class="mt-auto bg-red-300 text-white border-none py-2 px-5 cursor-pointer rounded-lg"
+        >
+          Logout
+        </button>
+      </nav>
+      <div class="flex flex-col gap-5">
+        <TransactionSummary incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
+        <TransactionForm addTransaction={addTransaction} />
       </div>
-      <TransactionForm addTransaction={addTransaction} />
-      <TransactionList
-        transactions={transactions}
-        deleteTransaction={deleteTransaction}
-      />
+      <div>
+        {/* <h2>Transactions</h2> */}
 
+        <TransactionList
+          transactions={transactions}
+          deleteTransaction={deleteTransaction}
+        />
+      </div>
       <ToastContainer />
     </div>
+
+    //   <div>
+    //     {" "}
+    //     <h1>Welcome {loggedInUser}</h1>
+    //     <button onClick={handleLogOut}>Logout</button>
+    //     <TransactionSummary
+    //     incomeAmt={incomeAmt}
+    //     expenseAmt={expenseAmt}
+    //     />
+    //     <h2>Transactions</h2>
+    //   </div>
+    //   <TransactionForm addTransaction={addTransaction} />
+    //   <TransactionList
+    //     transactions={transactions}
+    //     deleteTransaction={deleteTransaction}
+    //   />
+
+    //   <ToastContainer />
+    // </div>
   );
 }
 

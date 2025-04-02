@@ -56,36 +56,36 @@ function LogIn() {
   };
 
   return (
-    <div className="container">
-      <h1>LogIn</h1>
-      <form onSubmit={handleLogIn}>
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
+    <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h1 class="text-2xl font-bold mb-6 text-center">LogIn</h1>
+      <form onSubmit={handleLogIn} class="space-y-4">
+        <div>
+          <label htmlFor="email" class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
           <input
             onChange={handleChange}
             type="email"
             id="email"
-            className="form-control"
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter email"
             value={LogInData.email}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
           <input
             onChange={handleChange}
             type="password"
             id="password"
-            className="form-control"
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter password"
             value={LogInData.password}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit"   class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
           LogIn
         </button>
-        <span>
-          Doesn't have an account <Link to="/signup">SignUp</Link>
+        <span class="block mt-4 text-sm text-gray-600 text-center">
+          Doesn't have an account <Link to="/signup" class="text-blue-500 hover:underline">SignUp</Link>
         </span>
       </form>
       <ToastContainer />
