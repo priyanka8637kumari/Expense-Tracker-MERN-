@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { handleSucess } from "../utils";
+import { handleSucess, handleError } from "../utils";
 import TransactionList from "./TransactionList";
 import TransactionForm from "./TransactionForm";
 import TransactionSummary from "./TransactionSummary";
-// import profileIcon from "../assets/profileIcon.png";
 import Chart from "../components/Chart";
 
 function Home() {
-  // const name = localStorage.getItem("loggedIn user");
+
+  //const apiBaseUrl = "http://localhost:5001/api/transactions";
   const [loggedInUser, setLoggedInUser] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [expenseAmt, setExpenseAmt] = useState(0);
   const [incomeAmt, setIncomeAmt] = useState(0);
   const [currentDate, setCurrentDate] = useState("");
-  //const navigate = useNavigate();
+ 
 
   useEffect(() => {
-    // Get the current date
+    // Getting the current date
     const today = new Date();
     const options = { weekday: "short", month: "short", day: "numeric" };
     const formattedDate = today
@@ -45,30 +44,23 @@ function Home() {
     setExpenseAmt(expense);
   }, [transactions]);
 
-  // const handleLogOut = () => {
-  //   localStorage.removeItem("loggedIn user");
-  //   localStorage.removeItem("userId");
-
-  //   handleSucess("Logged out successfully!");
-  //   setTimeout(() => {
-  //     navigate("/login");
-  //   }, 1000);
-  // };
-
+ 
+  //Fetching transactions for the logged-in user from the API.
   const fetchTransactions = async () => {
     try {
       const userId = localStorage.getItem("userId");
       const url = "http://localhost:5001/api/transactions/" + userId;
       const response = await fetch(url);
       const data = await response.json();
-      // console.log(data);
       setTransactions(data.transactions);
-      // console.log("transactions on home page", data.transactions);
+      
     } catch (error) {
       console.log(error);
+      handleError("Failed to fetch transactions. Please try again later.");
     }
   };
 
+  //Adding a new transaction to the logged-in user's transactions.
   const addTransaction = async (transaction) => {
     try {
       const userId = localStorage.getItem("userId");
@@ -91,6 +83,7 @@ function Home() {
     }
   };
 
+  //Deleting a transaction from the logged-in user's transactions.
   const deleteTransaction = async (transactionId) => {
     try {
       const userId = localStorage.getItem("userId");
@@ -120,15 +113,16 @@ function Home() {
   }, []);
 
   return (
-    <section class=" mt-12 w-full grid grid-cols-1 md:grid-cols-[40%_60%] gap-10">
-      <div class="flex gap-2 flex-col items-start">
+    <main>
+    <section className=" mt-12 w-full grid grid-cols-1 md:grid-cols-[40%_60%] gap-10">
+      <div className="flex gap-2 flex-col items-start">
         <div>
-          <h1 class="text-4xl font-extrabold font-[Rubik]">DASHBOARD</h1>
-          <p class="text-2xl mt-4 text-left">
-            Hello, <span class="text-orange-500">{loggedInUser}</span>
+          <h1 className="text-4xl font-extrabold font-[Rubik]">DASHBOARD</h1>
+          <p className="text-2xl mt-4 text-left">
+            Hello, <span className="text-orange-500">{loggedInUser}</span>
           </p>
-          <p class="text-2xl mt-1 text-left">Welcome!</p>
-          <p class="mt-1 text-slate-500 text-left">{currentDate}</p>
+          <p className="text-2xl mt-1 text-left">Welcome!</p>
+          <p className="mt-1 text-slate-500 text-left">{currentDate}</p>
         </div>
 
         <TransactionSummary incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
@@ -136,7 +130,7 @@ function Home() {
         <Chart incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
       </div>
 
-      <div class="flex flex-col mx-10 px-4 gap-16">
+      <div className="flex flex-col mx-6 px-4 gap-16">
         <TransactionList
           transactions={transactions}
           deleteTransaction={deleteTransaction}
@@ -144,6 +138,7 @@ function Home() {
         <TransactionForm addTransaction={addTransaction} />
       </div>
     </section>
+    </main>
   );
 }
 

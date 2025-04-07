@@ -1,37 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navbar({ handleLogOut}) {
+function Navbar({ handleLogOut }) {
   return (
-    <nav class="w-full h-20 flex justify-between items-center px-4 py-4">
-      <div class="text-2xl font-bold font-[Rubik]">
-        <Link to="/">
-          Money<span class="text-orange-500">Mate</span>
-        </Link>
-      </div>
-      <div class="flex gap-8">
-        {location.pathname === "/home" ? (
-           <button
-           onClick={handleLogOut}
-           className=" text-white hover:text-orange-500 cursor-pointer"
-         >
-           Logout
-         </button>
-        ) : (
-          <>
-        <Link to="/login" class="cursor-pointer hover:text-orange-500">
-          Log In
-        </Link>
-        <Link to="/signup" class="cursor-pointer hover:text-orange-500">
-          Sign Up
-        </Link>
-        </>
-        )}
-      </div>
-      {/* <div class="md:hidden">
-              <Link to="#" class="text-6xl cursor-pointer hover:text-orange-500">&#8801;</Link>
-            </div> */}
-    </nav>
+    <header>
+      <nav className="w-full h-20 flex justify-between items-center px-4 py-4">
+        <div className="text-2xl font-bold font-[Rubik]">
+          <Link to="/" aria-label="website name">
+            Money<span className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500">Mate</span>
+          </Link>
+        </div>
+        <div className="flex gap-8">
+          {location.pathname === "/home" ? (
+            <button
+              onClick={handleLogOut}
+              className=" text-white hover:text-orange-500 cursor-pointer focus:outline-none focus:ring focus:ring-orange-500"
+              aria-label="Logout button of your account"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="cursor-pointer hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                aria-label="Link for login"
+              >
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                className="cursor-pointer hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                aria-label="link for signup"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
+        </div>
+      </nav>
+    </header>
   );
 }
 

@@ -62,60 +62,78 @@ function SignUp() {
   };
 
   return (
-    <section class="items-center justify-center mt-16 w-full grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10">
-      <About />
-      <div class="px-8 py-16 bg-white rounded-2xl shadow-md fade-in">
-        <h2 class="text-4xl font-bold text-black font-[Rubik] mb-10">
-          Sign Up
-        </h2>
-        <form onSubmit={handleSignUp} class="space-y-4">
-          <div>
-            <input
-              onChange={handleChange}
-              type="text"
-              id="name"
-              class="w-full p-3 mb-2 border text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              autoFocus
-              placeholder="Enter your name"
-              value={signupData.name}
-            />
-          </div>
-          <div>
-            <input
-              onChange={handleChange}
-              type="email"
-              id="email"
-              class="w-full p-3 mb-2 border text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              placeholder="Enter your email"
-              value={signupData.email}
-            />
-          </div>
-          <div>
-            <input
-              onChange={handleChange}
-              type="password"
-              id="password"
-              class="w-full p-3 mb-2 border text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              placeholder="Enter your password"
-              value={signupData.password}
-            />
-          </div>
-          <button
-            type="submit"
-            class="bg-orange-500 py-2 px-10 rounded-lg hover:bg-white hover:text-orange-500 hover:border hover:border-orange-500"
-          >
+    <main>
+      <section className="items-center justify-center mt-16 w-full grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10">
+        <About />
+        <div className="px-8 py-16 bg-white rounded-2xl shadow-md fade-in">
+          <h2 className="text-4xl font-bold text-black font-[Rubik] mb-10">
             Sign Up
-          </button>
-          <span class="block mt-4 text-lg text-gray-600 text-center">
-            Already have an account?{" "}
-            <Link to="/login" class="text-orange-500 hover:underline">
-              Log In
-            </Link>
-          </span>
-        </form>
-        <ToastContainer />
-      </div>
-    </section>
+          </h2>
+          <form onSubmit={handleSignUp} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <input
+                onChange={handleChange}
+                type="text"
+                id="name"
+                className="w-full p-3 mb-2 border text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                autoFocus
+                placeholder="Enter your name"
+                value={signupData.name}
+                aria-label="name"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email Address
+              </label>
+              <input
+                onChange={handleChange}
+                type="email"
+                id="email"
+                className="w-full p-3 mb-2 border text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter your email"
+                value={signupData.email}
+                aria-label="email"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                onChange={handleChange}
+                type="password"
+                id="password"
+                className="w-full p-3 mb-2 border text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Enter your password"
+                value={signupData.password}
+                aria-label="password"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-orange-500 py-2 px-10 rounded-lg hover:bg-white hover:text-orange-500 hover:border hover:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-50"
+              aria-label="Submit sign-up form"
+            >
+              Sign Up
+            </button>
+            <span className="block mt-4 text-lg text-gray-600 text-center">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-orange-500 hover:underline focus:outline-none focus:ring-2 focus:ring-orange-50"
+              >
+                Log In
+              </Link>
+            </span>
+          </form>
+          <ToastContainer />
+        </div>
+      </section>
+    </main>
   );
 }
 
