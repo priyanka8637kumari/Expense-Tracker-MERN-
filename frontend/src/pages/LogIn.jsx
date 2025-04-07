@@ -57,9 +57,9 @@ function LogIn() {
   };
 
   return (
-    <section class="items-center justify-center mt-16 w-full grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10">
+    <section class="items-center justify-center mt-12 w-full grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10">
       <About />
-      <div class="px-8 py-16 bg-white rounded-2xl shadow-md">
+      <div class="px-8 py-16 bg-white rounded-2xl shadow-md fade-in">
         <h2 className="text-4xl font-bold text-black font-[Rubik] mb-10">
           LOGIN
         </h2>
@@ -79,14 +79,14 @@ function LogIn() {
               onChange={handleChange}
               type="password"
               id="password"
-              class="w-full p-3 mb-2 border  text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full p-3 mb-2 border  text-gray-700 text-lg border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               placeholder="Enter your password"
               value={LogInData.password}
             />
           </div>
           <button
             type="submit"
-            class="bg-orange-500 py-2 px-10 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600"
+            class="bg-orange-500 py-2 px-10 rounded-lg hover:bg-white hover:text-orange-500 hover:border hover:border-orange-500"
           >
             Log in
           </button>

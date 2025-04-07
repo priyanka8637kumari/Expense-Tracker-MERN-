@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleSucess } from "../utils";
 import TransactionList from "./TransactionList";
 import TransactionForm from "./TransactionForm";
 import TransactionSummary from "./TransactionSummary";
-import profileIcon from "../assets/profileIcon.png";
+// import profileIcon from "../assets/profileIcon.png";
+import Chart from "../components/Chart";
 
 function Home() {
   // const name = localStorage.getItem("loggedIn user");
@@ -13,7 +14,18 @@ function Home() {
   const [transactions, setTransactions] = useState([]);
   const [expenseAmt, setExpenseAmt] = useState(0);
   const [incomeAmt, setIncomeAmt] = useState(0);
-  const navigate = useNavigate();
+  const [currentDate, setCurrentDate] = useState("");
+  //const navigate = useNavigate();
+
+  useEffect(() => {
+    // Get the current date
+    const today = new Date();
+    const options = { weekday: "short", month: "short", day: "numeric" };
+    const formattedDate = today
+      .toLocaleDateString("en-US", options)
+      .replace(",", "");
+    setCurrentDate(formattedDate);
+  }, []);
 
   useEffect(() => {
     const name = localStorage.getItem("loggedIn user");
@@ -33,15 +45,15 @@ function Home() {
     setExpenseAmt(expense);
   }, [transactions]);
 
-  const handleLogOut = () => {
-    localStorage.removeItem("loggedIn user");
-    localStorage.removeItem("userId");
+  // const handleLogOut = () => {
+  //   localStorage.removeItem("loggedIn user");
+  //   localStorage.removeItem("userId");
 
-    handleSucess("Logged out successfully!");
-    setTimeout(() => {
-      navigate("/login");
-    }, 1000);
-  };
+  //   handleSucess("Logged out successfully!");
+  //   setTimeout(() => {
+  //     navigate("/login");
+  //   }, 1000);
+  // };
 
   const fetchTransactions = async () => {
     try {
@@ -106,60 +118,32 @@ function Home() {
   useEffect(() => {
     fetchTransactions();
   }, []);
-  return (
-    <div class="grid grid-cols-[250px_auto_400px] gap-5 p-5 bg-gray-500">
-      <nav class="bg-white p-5 rounded-lg flex flex-col items-center shadow-md shadow-gray-300">
-        <div class="flex flex-row">
-          <img
-            src={profileIcon}
-            alt="User avatar of Mike"
-            class="w-15 h-15 rounded-full"
-          />
-          <div>
-            <h1>Welcome {loggedInUser}</h1>
-            <p>My Money</p>
-          </div>
-        </div>
-        <button
-          onClick={handleLogOut}
-          class="mt-auto bg-red-300 text-white border-none py-2 px-5 cursor-pointer rounded-lg"
-        >
-          Logout
-        </button>
-      </nav>
-      <div class="flex flex-col gap-5">
-        <TransactionSummary incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
-        <TransactionForm addTransaction={addTransaction} />
-      </div>
-      <div>
-        {/* <h2>Transactions</h2> */}
 
+  return (
+    <section class=" mt-12 w-full grid grid-cols-1 md:grid-cols-[40%_60%] gap-10">
+      <div class="flex gap-2 flex-col items-start">
+        <div>
+          <h1 class="text-4xl font-extrabold font-[Rubik]">DASHBOARD</h1>
+          <p class="text-2xl mt-4 text-left">
+            Hello, <span class="text-orange-500">{loggedInUser}</span>
+          </p>
+          <p class="text-2xl mt-1 text-left">Welcome!</p>
+          <p class="mt-1 text-slate-500 text-left">{currentDate}</p>
+        </div>
+
+        <TransactionSummary incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
+
+        <Chart incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
+      </div>
+
+      <div class="flex flex-col mx-10 px-4 gap-16">
         <TransactionList
           transactions={transactions}
           deleteTransaction={deleteTransaction}
         />
+        <TransactionForm addTransaction={addTransaction} />
       </div>
-      <ToastContainer />
-    </div>
-
-    //   <div>
-    //     {" "}
-    //     <h1>Welcome {loggedInUser}</h1>
-    //     <button onClick={handleLogOut}>Logout</button>
-    //     <TransactionSummary
-    //     incomeAmt={incomeAmt}
-    //     expenseAmt={expenseAmt}
-    //     />
-    //     <h2>Transactions</h2>
-    //   </div>
-    //   <TransactionForm addTransaction={addTransaction} />
-    //   <TransactionList
-    //     transactions={transactions}
-    //     deleteTransaction={deleteTransaction}
-    //   />
-
-    //   <ToastContainer />
-    // </div>
+    </section>
   );
 }
 

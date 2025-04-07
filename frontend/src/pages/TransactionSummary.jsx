@@ -2,9 +2,9 @@ import React from 'react'
 
 function TransactionSummary({incomeAmt, expenseAmt}) {
   return (
-    <div class="flex justify-between g-4 bg-white rounded-lg p-5 text-center shadow-md">
-      <p class="text-green-500 text-2xl text-bold">Income: {incomeAmt}</p>
-      <p class="text-red-500 text-2xl text-bold">Expense: {expenseAmt}</p>
+    <div class="border border-slate-700 mt-4 mx-auto flex flex-col rounded-lg p-5 shadow-md md:flex-row gap-8">
+      <p class="text-2xl text-white">Income: {incomeAmt}</p>
+      <p class="text-2xl text-orange-500">Expense: {expenseAmt}</p>
     </div>
   )
 }

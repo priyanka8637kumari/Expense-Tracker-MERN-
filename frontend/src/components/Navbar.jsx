@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ handleLogOut}) {
   return (
     <nav class="w-full h-20 flex justify-between items-center px-4 py-4">
       <div class="text-2xl font-bold font-[Rubik]">
@@ -10,7 +10,14 @@ function Navbar() {
         </Link>
       </div>
       <div class="flex gap-8">
-        {location.pathname !== "/home" && (
+        {location.pathname === "/home" ? (
+           <button
+           onClick={handleLogOut}
+           className=" text-white hover:text-orange-500 cursor-pointer"
+         >
+           Logout
+         </button>
+        ) : (
           <>
         <Link to="/login" class="cursor-pointer hover:text-orange-500">
           Log In
