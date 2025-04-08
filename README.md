@@ -27,7 +27,29 @@ still in progress
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/moneymate.git
-cd moneymate
+git clone https://github.com/priyanka8637kumari/Expense-Tracker-MERN-.git
+cd Expense-Tracker-MERN-
+
+cd backend
+npm install
+
+cd frontend
+npm install
+```
+
+## Configure Environment Variables, Create a .env file in the server/ folder with:
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+
+```bash
+cd backend
+npm start
+
+cd frontend
+npm run dev
+```
+Now visit: http://localhost:5173
+
+
 
 
