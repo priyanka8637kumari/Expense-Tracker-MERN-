@@ -5,13 +5,16 @@ import Home from './pages/Home';
 import './App.css';
 import Navbar from './components/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
+import Cookies from "js-cookie";
 
 function App() {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    localStorage.removeItem("loggedIn user");
-    localStorage.removeItem("userId");
+    //localStorage.removeItem("loggedIn user");
+    Cookies.remove("loggedInUser");
+    Cookies.remove("userId");
+    //localStorage.removeItem("userId");
 
     toast.success("Logged out successfully!");
     setTimeout(() => {

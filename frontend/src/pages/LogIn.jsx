@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSucess } from "../utils";
 import About from "../components/About";
+import Cookies from "js-cookie";
 
 function LogIn() {
   const [LogInData, setLogInData] = useState({
@@ -40,8 +41,10 @@ function LogIn() {
       const { success, message, error, name, userId } = data;
       if (success) {
         handleSucess(message);
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("loggedIn user", name);
+        //localStorage.setItem("userId", userId);
+        // localStorage.setItem("loggedIn user", name);
+        Cookies.set("loggedInUser", name, { secure: true, sameSite: "Strict" });
+        Cookies.set("userId", userId, { secure: true, sameSite: "Strict" });
         setTimeout(() => {
           navigate("/home");
         }, 1000);

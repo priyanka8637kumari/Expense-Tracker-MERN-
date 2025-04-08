@@ -5,6 +5,7 @@ import TransactionList from "./TransactionList";
 import TransactionForm from "./TransactionForm";
 import TransactionSummary from "./TransactionSummary";
 import Chart from "../components/Chart";
+import Cookies from "js-cookie";
 
 function Home() {
 
@@ -27,7 +28,8 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    const name = localStorage.getItem("loggedIn user");
+    const name = Cookies.get("loggedInUser");
+    //const name = localStorage.getItem("loggedIn user");
     setLoggedInUser(name);
   }, []);
 
@@ -48,7 +50,8 @@ function Home() {
   //Fetching transactions for the logged-in user from the API.
   const fetchTransactions = async () => {
     try {
-      const userId = localStorage.getItem("userId");
+      //const userId = localStorage.getItem("userId");
+      const userId = Cookies.get("userId");
       const url = "http://localhost:5001/api/transactions/" + userId;
       const response = await fetch(url);
       const data = await response.json();
@@ -63,7 +66,8 @@ function Home() {
   //Adding a new transaction to the logged-in user's transactions.
   const addTransaction = async (transaction) => {
     try {
-      const userId = localStorage.getItem("userId");
+      //const userId = localStorage.getItem("userId");
+      const userId = Cookies.get("userId");
       const url = "http://localhost:5001/api/transactions";
       const response = await fetch(url, {
         method: "POST",
@@ -86,7 +90,8 @@ function Home() {
   //Deleting a transaction from the logged-in user's transactions.
   const deleteTransaction = async (transactionId) => {
     try {
-      const userId = localStorage.getItem("userId");
+      //const userId = localStorage.getItem("userId");
+      const userId = Cookies.get("userId");
       const url = "http://localhost:5001/api/transactions";
       const response = await fetch(url, {
         method: "DELETE",

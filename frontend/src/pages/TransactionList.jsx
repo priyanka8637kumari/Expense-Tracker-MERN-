@@ -1,5 +1,5 @@
 import React from "react";
-//import homepageImage2 from "../assets/homepageImage2.png";
+
 
 function TransactionList({ transactions, deleteTransaction }) {
   const formatDate = (dateString) => {
@@ -8,9 +8,10 @@ function TransactionList({ transactions, deleteTransaction }) {
     return date.toLocaleDateString("en-US", options).replace(",", "");
   };
   return (
-    // <div className="flex border-b-1 border-slate-700 py-4">
     <div className="px-8">
-      <h2 className="text-3xl font-extrabold font-[Rubik mb-6">My Transactions</h2>
+      <h2 className="text-3xl font-extrabold font-[Rubik mb-6">
+        My Transactions
+      </h2>
       {transactions?.map((transaction, index) => (
         <div
           key={index}
@@ -28,8 +29,6 @@ function TransactionList({ transactions, deleteTransaction }) {
         </div>
       ))}
     </div>
-   
-  
   );
 }
 

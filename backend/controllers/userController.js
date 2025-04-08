@@ -37,6 +37,16 @@ const login = async (req, res) => {
         .status(403)
         .json({ message: "Invalid credentials", success: false });
     }
+
+    //  // Set the userId in an HTTP-only cookie
+    //  res.cookie("userId", user._id, {
+    //   httpOnly: true, // Prevent access via JavaScript
+    //   secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+    //   sameSite: "Strict", // Prevent CSRF attacks
+    //   maxAge: 24 * 60 * 60 * 1000, // 1 day
+    // });
+
+    // console.log("Cookie set: userId =", user._id);
     res
       .status(200)
       .json({
