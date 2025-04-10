@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { handleError } from "../utils";
 import homepageImage from "../assets/homepageImage.png";
+import { trackEvent } from "../analytics";
 
 function TransactionForm({ addTransaction }) {
   const [transactionData, setTransactionData] = useState({
@@ -24,6 +25,9 @@ function TransactionForm({ addTransaction }) {
       handleError("All fields are required!");
       return;
     }
+    //Tracking form submission
+    trackEvent("Form", "Submit", "Transaction Form");
+
     setTimeout(() => {
       setTransactionData({ text: "", amount: "" });
     }, 1000);

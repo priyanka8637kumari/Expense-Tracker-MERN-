@@ -6,9 +6,18 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import Cookies from "js-cookie";
+import { initializeAnalytics, trackPageView } from "./analytics"; 
+import { useEffect } from 'react';
 
 function App() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    initializeAnalytics();
+    console.log("Analytics initialized");
+    trackPageView(window.location.pathname);
+    console.log(`Page view tracked: ${window.location.pathname}`);
+  }, []);
 
   const handleLogOut = () => {
     //localStorage.removeItem("loggedIn user");

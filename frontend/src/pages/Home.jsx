@@ -52,7 +52,7 @@ function Home() {
     try {
       //const userId = localStorage.getItem("userId");
       const userId = Cookies.get("userId");
-      const url = "http://localhost:5001/api/transactions/" + userId;
+      const url = `${import.meta.env.VITE_API_BASE_URL}/transactions/${userId}`;
       const response = await fetch(url);
       const data = await response.json();
       setTransactions(data.transactions);
@@ -68,7 +68,7 @@ function Home() {
     try {
       //const userId = localStorage.getItem("userId");
       const userId = Cookies.get("userId");
-      const url = "http://localhost:5001/api/transactions";
+      const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -92,7 +92,7 @@ function Home() {
     try {
       //const userId = localStorage.getItem("userId");
       const userId = Cookies.get("userId");
-      const url = "http://localhost:5001/api/transactions";
+      const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;
       const response = await fetch(url, {
         method: "DELETE",
         headers: {

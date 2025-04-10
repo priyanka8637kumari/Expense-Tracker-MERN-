@@ -1,5 +1,5 @@
 import React from "react";
-
+//className={transaction.amount < 0 ? "minus" : "plus"}
 
 function TransactionList({ transactions, deleteTransaction }) {
   const formatDate = (dateString) => {
@@ -12,7 +12,8 @@ function TransactionList({ transactions, deleteTransaction }) {
       <h2 className="text-3xl font-extrabold font-[Rubik mb-6">
         My Transactions
       </h2>
-      {transactions?.map((transaction, index) => (
+      {transactions && transactions.length > 0 ? (
+      transactions?.map((transaction, index) => (
         <div
           key={index}
           className="flex justify-between p-2 border-b-1 border-slate-700 gap-0.5"
@@ -20,14 +21,20 @@ function TransactionList({ transactions, deleteTransaction }) {
           <button
             onClick={() => deleteTransaction(transaction._id)}
             className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            title="Delete your entry"
           >
             X
           </button>
           <div>{transaction.text}</div>
-          <div>{transaction.amount}</div>
+          <div className={`${transaction.amount < 0 ? "text-orange-500" : "text-white"}`}>{transaction.amount}</div>
           <div>{formatDate(transaction.createdOn)}</div>
         </div>
-      ))}
+      ))
+      ) : (
+        <div className="text-center text-gray-500">
+          No transactions available.
+        </div>
+      )}
     </div>
   );
 }

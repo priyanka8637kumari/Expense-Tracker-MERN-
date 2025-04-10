@@ -6,7 +6,7 @@ const signup = async (req, res) => {
     const { name, email, password } = req.body;
     const user = await userModel.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(409).json({ message: "User already exists" });
     }
     const newUser = new userModel({ name, email, password });
     newUser.password = await bcrypt.hash(password, 10);
@@ -28,13 +28,13 @@ const login = async (req, res) => {
     const user = await userModel.findOne({ email });
     if (!user) {
       return res
-        .status(403)
+        .status(401)
         .json({ message: "Invalid credentials", success: false });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res
-        .status(403)
+        .status(401)
         .json({ message: "Invalid credentials", success: false });
     }
 
