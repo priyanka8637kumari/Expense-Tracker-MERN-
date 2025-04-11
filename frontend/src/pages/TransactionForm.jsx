@@ -19,7 +19,6 @@ function TransactionForm({ addTransaction }) {
 
   const handleTransaction = (e) => {
     e.preventDefault();
-   // console.log("transactionData", transactionData);
     const { text, amount } = transactionData;
     if (!text || !amount) {
       handleError("All fields are required!");
@@ -32,7 +31,7 @@ function TransactionForm({ addTransaction }) {
       handleError("Amount must be a number!");
       return;
     }
-    
+
     //Tracking form submission
     trackEvent("Form", "Submit", "Transaction Form");
 

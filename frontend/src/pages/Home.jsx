@@ -5,6 +5,7 @@ import TransactionForm from "./TransactionForm";
 import TransactionSummary from "./TransactionSummary";
 import Chart from "../components/Chart";
 import Cookies from "js-cookie";
+import { ToastContainer } from "react-toastify";
 
 function Home() {
 
@@ -135,6 +136,7 @@ function Home() {
           deleteTransaction={deleteTransaction}
         />
         <TransactionForm addTransaction={addTransaction} />
+        <ToastContainer />
       </div>
     </section>
     </main>
