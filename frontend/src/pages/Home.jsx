@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
 import { handleSucess, handleError } from "../utils";
 import TransactionList from "./TransactionList";
 import TransactionForm from "./TransactionForm";
@@ -9,7 +8,6 @@ import Cookies from "js-cookie";
 
 function Home() {
 
-  //const apiBaseUrl = "http://localhost:5001/api/transactions";
   const [loggedInUser, setLoggedInUser] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [expenseAmt, setExpenseAmt] = useState(0);
@@ -29,7 +27,6 @@ function Home() {
 
   useEffect(() => {
     const name = Cookies.get("loggedInUser");
-    //const name = localStorage.getItem("loggedIn user");
     setLoggedInUser(name);
   }, []);
 
@@ -50,7 +47,6 @@ function Home() {
   //Fetching transactions for the logged-in user from the API.
   const fetchTransactions = async () => {
     try {
-      //const userId = localStorage.getItem("userId");
       const userId = Cookies.get("userId");
       const url = `${import.meta.env.VITE_API_BASE_URL}/transactions/${userId}`;
       const response = await fetch(url);
@@ -66,7 +62,6 @@ function Home() {
   //Adding a new transaction to the logged-in user's transactions.
   const addTransaction = async (transaction) => {
     try {
-      //const userId = localStorage.getItem("userId");
       const userId = Cookies.get("userId");
       const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;;
       const response = await fetch(url, {
@@ -90,7 +85,6 @@ function Home() {
   //Deleting a transaction from the logged-in user's transactions.
   const deleteTransaction = async (transactionId) => {
     try {
-      //const userId = localStorage.getItem("userId");
       const userId = Cookies.get("userId");
       const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;
       const response = await fetch(url, {

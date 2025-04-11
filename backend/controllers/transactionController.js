@@ -1,6 +1,7 @@
 import userModel from "../models/Users.js";
 import transactionModel from "../models/Transactions.js";
 
+//function to create a new transaction for a user
 const createTransaction = async (req, res) => {
   try {
     const { userId, text, amount } = req.body;
@@ -33,13 +34,12 @@ const createTransaction = async (req, res) => {
   }
 };
 
+//function to get all transaction List for a user
 const getTransactions = async (req, res) => {
   try {
     const userId = req.params.userId;
-    console.log("userId", userId);
     const user = await userModel.findById(userId).populate("transactions");
-    console.log("user", user);
-    console.log("transactions", user.transactions);
+    
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -54,6 +54,7 @@ const getTransactions = async (req, res) => {
   }
 };
 
+//function to delete a transaction entry for a user
 const deleteTransaction = async (req, res) => {
   try {
     const { userId, transactionId } = req.body;

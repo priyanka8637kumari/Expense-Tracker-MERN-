@@ -7,7 +7,10 @@ function Navbar({ handleLogOut }) {
       <nav className="w-full h-20 flex justify-between items-center px-4 py-4">
         <div className="text-2xl font-bold font-[Rubik]">
           <Link to="/" aria-label="website name">
-            Money<span className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500">Mate</span>
+            Money
+            <span className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500">
+              Mate
+            </span>
           </Link>
         </div>
         <div className="flex gap-8">

@@ -28,8 +28,8 @@ function LogIn() {
       return handleError("All fields are required!");
     }
     try {
-      // Call the API
-      const url = "http://localhost:5001/api/users/login";
+      // Calling the API
+      const url = `${import.meta.env.VITE_API_BASE_URL}/users/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -41,10 +41,11 @@ function LogIn() {
       const { success, message, error, name, userId } = data;
       if (success) {
         handleSucess(message);
-        //localStorage.setItem("userId", userId);
-        // localStorage.setItem("loggedIn user", name);
+
+        // Setting cookies for logged in user and userId
         Cookies.set("loggedInUser", name, { secure: true, sameSite: "Strict" });
         Cookies.set("userId", userId, { secure: true, sameSite: "Strict" });
+
         setTimeout(() => {
           navigate("/home");
         }, 1000);
@@ -103,7 +104,10 @@ function LogIn() {
             </button>
             <span className="block mt-4 text-lg text-gray-600 text-center">
               Doesn't have an account{" "}
-              <Link to="/signup" className="text-orange-500 hover:underline focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <Link
+                to="/signup"
+                className="text-orange-500 hover:underline focus:outline-none focus:ring-2 focus:ring-orange-500"
+              >
                 Sign Up
               </Link>
             </span>

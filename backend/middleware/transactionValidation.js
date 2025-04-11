@@ -1,4 +1,3 @@
-import e from "express";
 import Joi from "joi";
 
 const transactionValidation = (req, res, next) => {

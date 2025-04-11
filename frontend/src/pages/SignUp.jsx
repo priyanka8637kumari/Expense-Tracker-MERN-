@@ -32,8 +32,8 @@ function SignUp() {
       return handleError("All fields are required!");
     }
     try {
-      // Call the API
-      const url = "http://localhost:5001/api/users/signup";
+      // Calling the API
+      const url = `${import.meta.env.VITE_API_BASE_URL}/users/signup`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -55,7 +55,6 @@ function SignUp() {
         handleError(message);
       }
 
-      // If the user is successfully signed up, redirect to the login page
     } catch (error) {
       handleError(error.message);
     }

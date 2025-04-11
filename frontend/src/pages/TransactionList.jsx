@@ -1,5 +1,4 @@
 import React from "react";
-//className={transaction.amount < 0 ? "minus" : "plus"}
 
 function TransactionList({ transactions, deleteTransaction }) {
   const formatDate = (dateString) => {

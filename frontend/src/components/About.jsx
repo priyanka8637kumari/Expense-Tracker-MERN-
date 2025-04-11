@@ -16,14 +16,6 @@ function About() {
       <p className="leading-relaxed text-lg italic">
         "Your smart companion for effortless expense tracking."
       </p>
-
-      <Link
-        to="/signup"
-        className=" bg-orange-500 py-3 px-10 rounded-lg hover:bg-slate-900 hover:border hover:border-orange-500 transition focus:outline-none focus:ring focus:ring-orange-500"
-        aria-label="Sign up for MoneyMate"
-      >
-        Sign Up
-      </Link>
     </section>
   );
 }

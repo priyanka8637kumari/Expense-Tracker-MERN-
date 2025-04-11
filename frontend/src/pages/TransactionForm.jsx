@@ -25,6 +25,14 @@ function TransactionForm({ addTransaction }) {
       handleError("All fields are required!");
       return;
     }
+
+    // Check if amount is a number
+    const amountNum = parseFloat(amount);
+    if (isNaN(amountNum)) {
+      handleError("Amount must be a number!");
+      return;
+    }
+    
     //Tracking form submission
     trackEvent("Form", "Submit", "Transaction Form");
 
