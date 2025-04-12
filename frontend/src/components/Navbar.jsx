@@ -26,7 +26,7 @@ function Navbar({ handleLogOut }) {
             <>
               <Link
                 to="/login"
-                className="cursor-pointer hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="flex gap-2 cursor-pointer hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 aria-label="Link for login"
               >
                 Log In

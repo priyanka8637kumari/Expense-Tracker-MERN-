@@ -8,13 +8,12 @@ import Cookies from "js-cookie";
 import { ToastContainer } from "react-toastify";
 
 function Home() {
-
   const [loggedInUser, setLoggedInUser] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [expenseAmt, setExpenseAmt] = useState(0);
   const [incomeAmt, setIncomeAmt] = useState(0);
   const [currentDate, setCurrentDate] = useState("");
- 
+  const [editTransaction, setEditTransaction] = useState(null);
 
   useEffect(() => {
     // Getting the current date
@@ -44,7 +43,6 @@ function Home() {
     setExpenseAmt(expense);
   }, [transactions]);
 
- 
   //Fetching transactions for the logged-in user from the API.
   const fetchTransactions = async () => {
     try {
@@ -53,7 +51,6 @@ function Home() {
       const response = await fetch(url);
       const data = await response.json();
       setTransactions(data.transactions);
-      
     } catch (error) {
       console.log(error);
       handleError("Failed to fetch transactions. Please try again later.");
@@ -64,7 +61,7 @@ function Home() {
   const addTransaction = async (transaction) => {
     try {
       const userId = Cookies.get("userId");
-      const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;;
+      const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -108,37 +105,80 @@ function Home() {
     }
   };
 
+  const updateTransaction = async (transactionId, updatedTransaction) => {
+    try {
+      const userId = Cookies.get("userId");
+      const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, transactionId, ...updatedTransaction }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        handleSucess(data.message);
+        const updatedTransactions = transactions.map((transaction) =>
+          transaction._id === transactionId
+            ? {
+                ...transaction,
+                ...updatedTransaction,
+                amount: Number(updatedTransaction.amount),
+              }
+            : transaction
+        );
+        setTransactions(updatedTransactions);
+        setEditTransaction(null);
+      } else {
+        handleError(data.message || "Failed to update transaction.");
+      }
+    } catch (error) {
+      console.log(error);
+      handleError("Failed to update transaction. Please try again later.");
+    }
+  };
+
   useEffect(() => {
     fetchTransactions();
   }, []);
 
   return (
     <main>
-    <section className=" mt-12 w-full grid grid-cols-1 md:grid-cols-[40%_60%] gap-10">
-      <div className="flex gap-2 flex-col items-start">
-        <div>
-          <h1 className="text-4xl font-extrabold font-[Rubik]">DASHBOARD</h1>
-          <p className="text-2xl mt-4 text-left">
-            Hello, <span className="text-orange-500">{loggedInUser}</span>
-          </p>
-          <p className="text-2xl mt-1 text-left">Welcome!</p>
-          <p className="mt-1 text-slate-500 text-left">{currentDate}</p>
+      <section className=" mt-12 w-full grid grid-cols-1 md:grid-cols-[40%_60%] gap-10">
+        <div className="flex gap-2 flex-col items-start">
+          <div>
+            <h1 className="text-4xl font-extrabold font-[Rubik]">DASHBOARD</h1>
+            <p className="text-2xl mt-4 text-left">
+              Hello, <span className="text-orange-500">{loggedInUser}</span>
+            </p>
+            <p className="text-2xl mt-1 text-left">Welcome!</p>
+            <p className="mt-1 text-slate-500 text-left">{currentDate}</p>
+          </div>
+
+          <TransactionSummary incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
+
+          <Chart incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
         </div>
 
-        <TransactionSummary incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
-
-        <Chart incomeAmt={incomeAmt} expenseAmt={expenseAmt} />
-      </div>
-
-      <div className="flex flex-col mx-6 px-4 gap-16">
-        <TransactionList
-          transactions={transactions}
-          deleteTransaction={deleteTransaction}
-        />
-        <TransactionForm addTransaction={addTransaction} />
-        <ToastContainer />
-      </div>
-    </section>
+        <div className="flex flex-col mx-6 px-4 gap-16">
+          <TransactionList
+            transactions={transactions}
+            deleteTransaction={deleteTransaction}
+            setEditTransaction={setEditTransaction}
+          />
+          <TransactionForm
+            transaction={editTransaction}
+            handleSubmit={
+              editTransaction
+                ? (updatedTransaction) =>
+                    updateTransaction(editTransaction._id, updatedTransaction)
+                : addTransaction
+            }
+          />
+          <ToastContainer />
+        </div>
+      </section>
     </main>
   );
 }

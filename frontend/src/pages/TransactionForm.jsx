@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { handleError } from "../utils";
 import homepageImage from "../assets/homepageImage.png";
 import { trackEvent } from "../analytics";
 
-function TransactionForm({ addTransaction }) {
+function TransactionForm({ transaction, handleSubmit }) {
   const [transactionData, setTransactionData] = useState({
     text: "",
     amount: "",
   });
+
+  useEffect(() => {
+    if (transaction) {
+      setTransactionData({
+        text: transaction.text || "",
+        amount: transaction.amount || "",
+      });
+    } else {
+      setTransactionData({
+        text: "",
+        amount: "",
+      });
+    }
+  }, [transaction]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -33,19 +47,27 @@ function TransactionForm({ addTransaction }) {
     }
 
     //Tracking form submission
-    trackEvent("Form", "Submit", "Transaction Form");
+    trackEvent(
+      "Form",
+      "Submit",
+      transaction ? "Update Transaction" : "Add Transaction"
+    );
 
-    setTimeout(() => {
-      setTransactionData({ text: "", amount: "" });
-    }, 1000);
-    addTransaction(transactionData);
+    handleSubmit({ ...transactionData, amount: amountNum });
+
+    // Reseting the form after submission
+    if (!transaction) {
+      setTimeout(() => {
+        setTransactionData({ text: "", amount: "" });
+      }, 1000);
+    }
   };
 
   return (
     <div className="flex flex-col md:flex-row">
       <div className="mx-auto -mt-8 p-6 rounded-lg basis-4/6">
         <p className="text-3xl font-extrabold font-[Rubik mb-6">
-          Add your Transaction
+          {transaction ? "Update your Transaction" : "Add your Transaction"}
         </p>
         <form onSubmit={handleTransaction}>
           <div className="mb-4">
@@ -78,10 +100,9 @@ function TransactionForm({ addTransaction }) {
             type="submit"
             className="bg-orange-500 py-2 px-10 mt-6 rounded-lg hover:bg-slate-900 hover:border hover:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
-            Add Transaction
+            {transaction ? "Update Transaction" : "Add Transaction"}
           </button>
         </form>
-        {/* <ToastContainer /> */}
       </div>
       <div className="basis-2/6">
         <img

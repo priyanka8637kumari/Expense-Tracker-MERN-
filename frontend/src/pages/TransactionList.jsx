@@ -1,6 +1,8 @@
 import React from "react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
-function TransactionList({ transactions, deleteTransaction }) {
+function TransactionList({ transactions, deleteTransaction, setEditTransaction }) {
+  // Function to format the date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { month: "short", day: "numeric" };
@@ -12,18 +14,27 @@ function TransactionList({ transactions, deleteTransaction }) {
         My Transactions
       </h2>
       {transactions && transactions.length > 0 ? (
-      transactions?.map((transaction, index) => (
+      transactions?.map((transaction) => (
         <div
-          key={index}
+          key={transaction._id}
           className="flex justify-between p-2 border-b-1 border-slate-700 gap-0.5"
         >
+          <div className="flex gap-2">
           <button
             onClick={() => deleteTransaction(transaction._id)}
             className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
             title="Delete your entry"
           >
-            X
+            <FaTrash />
           </button>
+          <button
+            onClick={() => setEditTransaction(transaction)}
+            className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            title="Edit your entry"
+          >
+            <FaEdit />
+          </button>
+          </div>
           <div>{transaction.text}</div>
           <div className={`${transaction.amount < 0 ? "text-orange-500" : "text-white"}`}>{transaction.amount}</div>
           <div>{formatDate(transaction.createdOn)}</div>

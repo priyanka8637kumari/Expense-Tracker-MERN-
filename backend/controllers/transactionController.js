@@ -39,7 +39,7 @@ const getTransactions = async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await userModel.findById(userId).populate("transactions");
-    
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -82,4 +82,39 @@ const deleteTransaction = async (req, res) => {
   }
 };
 
-export { createTransaction, getTransactions, deleteTransaction };
+// Function to update a transaction entry for a user
+
+const updateTransaction = async (req, res) => {
+  try {
+    const { userId, transactionId, text, amount } = req.body;
+
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const transaction = await transactionModel.findById(transactionId);
+    if (!transaction) {
+      return res.status(404).json({ message: "Transaction not found" });
+    }
+    transaction.text = text;
+    transaction.amount = amount;
+    await transaction.save();
+
+    res.status(200).json({
+      message: "Transaction updated successfully",
+      transaction: transaction,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export {
+  createTransaction,
+  getTransactions,
+  deleteTransaction,
+  updateTransaction,
+};
