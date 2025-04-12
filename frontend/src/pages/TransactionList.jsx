@@ -24,6 +24,7 @@ function TransactionList({ transactions, deleteTransaction, setEditTransaction }
             onClick={() => deleteTransaction(transaction._id)}
             className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
             title="Delete your entry"
+            aria-label="Delete transaction"
           >
             <FaTrash />
           </button>
@@ -31,6 +32,7 @@ function TransactionList({ transactions, deleteTransaction, setEditTransaction }
             onClick={() => setEditTransaction(transaction)}
             className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
             title="Edit your entry"
+            aria-label="Edit transaction"
           >
             <FaEdit />
           </button>
