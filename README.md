@@ -9,43 +9,49 @@
 - **Database**: MongoDB
 - **Authentication**: js-token
 
-## 🔐 Features
-
-- 🧾 User Authentication (Login)
-- 📋 View personal transaction list
-- ➕ Add income or expense transactions
-- ❌ Delete transactions
-- 📊 Simple and responsive UI
-
-## 🖼️ Demo
-
-still in progress
-
 
 ## 🛠️ Setup Instructions
 
-### 1. Clone the Repository
+### 1. Clone the Repository and change directory
 
 ```bash
 git clone https://github.com/priyanka8637kumari/Expense-Tracker-MERN-.git
 cd Expense-Tracker-MERN-
-
-cd backend
-npm install
-
-cd frontend
-npm install
 ```
 
-## Configure Environment Variables, Create a .env file in the server/ folder with:
-PORT=5001
-MONGO_URI=your_mongodb_connection_string
+### 2. Backend 
+  #### setting up backend
 
 ```bash
 cd backend
-npm start
+npm install
+```
+  #### create .env file
 
+```bash
+PORT=5001
+MONGODB_URI=mongodb://localhost:27017/expense-tracker-2
+```
+  #### Start the server
+  ```bash
+npm start
+```
+
+### 3. Frontend
+  #### setting up frontend
+
+```bash
 cd frontend
+npm install
+```
+  #### create .env file
+
+```bash
+VITE_API_BASE_URL=http://localhost:5001/api
+```  
+
+  #### Start the server
+  ```bash
 npm run dev
 ```
 Now visit: http://localhost:5173
