@@ -16,6 +16,7 @@
 
 ```bash
 git clone https://github.com/priyanka8637kumari/Expense-Tracker-MERN-.git
+
 cd Expense-Tracker-MERN-
 ```
 
@@ -24,12 +25,14 @@ cd Expense-Tracker-MERN-
 
 ```bash
 cd backend
+
 npm install
 ```
   #### create .env file
 
 ```bash
 PORT=5001
+
 MONGODB_URI=mongodb://localhost:27017/expense-tracker-2
 ```
   #### Start the server
@@ -42,6 +45,7 @@ npm start
 
 ```bash
 cd frontend
+
 npm install
 ```
   #### create .env file
