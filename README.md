@@ -70,6 +70,7 @@ npm run dev
 Now visit: http://localhost:5173
 
 
+
 # ♿ A11y and SEO
  ## Accessibility and SEO at Moneymate website:
 - I have used **semantic html** to define proper structure
@@ -79,7 +80,13 @@ Now visit: http://localhost:5173
 - Used **responsive design** to adapt website to different screen sizes
 - Added **meta description** for search engines: 
   <meta name="description" content="Track your income and expenses effortlessly with our Expense Tracker app. Manage your finances with ease." />
-- Meets WCAG 2.1 AA standards for color contrast  
+- Meets WCAG 2.1 AA standards for color contrast
+
+
+# 📊 Tracking
+
+
+# 🔐 Security
 
 
 
