@@ -100,6 +100,25 @@ Tracking is implemented in compliance with **GDPR** and other privacy regulation
 
 
 # 🔐 Security
+  ## Security (threats and vulnerabilities) at MoneyMate Website:
+  
+ - Added a **login system**, which is a step towards securing the website
+      - It is preventing unauthorized access
+      - Only authenticated users can add/delete/edit data
+      - User can view only their own transactions
+        
+ - Validated and sanitized inputs in the backend using **Joi** Library
+      - It prevents bad data from being saved
+
+ - Used **bcrypt to hash passwords**
+      - Password are secured before storing in database
+
+### Threat at website which I have not mitigated:
+
+  **To securely store sensitive data**: First I used local storage and then js-cookie to store my userId. I am rendering user names in my frontend, Which is vulnerable to XSS attacks. Instead, there are two methods to do it securely:
+   - By using HTTP-only cookies
+   - By using JWT
+
 
 
 
