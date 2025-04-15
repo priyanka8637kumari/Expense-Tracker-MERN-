@@ -78,12 +78,22 @@ Now visit: http://localhost:5173
 - Ensured **keyboard navigation** and provided visible **focus indicators** (focus:outline-none focus:ring-2 focus:ring-orange-500)
 - Provided **label** elements for form inputs to make accessible forms
 - Used **responsive design** to adapt website to different screen sizes
-- Added **meta description** for search engines: 
-  <meta name="description" content="Track your income and expenses effortlessly with our Expense Tracker app. Manage your finances with ease." />
+- Added **meta description** for search engines: <meta name="description" content="Track your income and expenses effortlessly with our Expense Tracker app. Manage your finances with ease." />
 - Meets WCAG 2.1 AA standards for color contrast
 
 
 # 📊 Tracking
+ ## Tracking at Moneymate website:
+ 
+I have used **Google Analytics** for tracking. I am **tracking frontend** for **page views** and **form submission**. I am using **react-ga4** to add GA to my website. 
+### Why: 
+
+Since I have built a React **Single Page App** (SPA) using React Router, react-ga4 is a better choice. Because react-ga4 helps track page views on route changes.
+Let’s say if a user goes from /login to /home: without react-ga4 no page view is tracked, but with react-ga4, I can send a pageview manually when the route changes.
+
+### Privacy:
+
+Tracking is implemented in compliance with **GDPR** and other privacy regulations. No personally identifiable information (PII) is collected.
 
 
 # 🔐 Security
