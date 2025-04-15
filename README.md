@@ -78,7 +78,10 @@ Now visit: http://localhost:5173
 - Ensured **keyboard navigation** and provided visible **focus indicators** (focus:outline-none focus:ring-2 focus:ring-orange-500)
 - Provided **label** elements for form inputs to make accessible forms
 - Used **responsive design** to adapt website to different screen sizes
-- Added **meta description** for search engines: <meta name="description" content="Track your income and expenses effortlessly with our Expense Tracker app. Manage your finances with ease." />
+- Added **meta description** for search engines:
+```bash
+  <meta name="description" content="Track your income and expenses effortlessly with our Expense Tracker app. Manage your finances with ease." />
+```
 - Meets WCAG 2.1 AA standards for color contrast
 
 
