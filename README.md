@@ -106,12 +106,12 @@ Tracking is implemented in compliance with **GDPR** and other privacy regulation
       - It is preventing unauthorized access
       - Only authenticated users can add/delete/edit data
       - User can view only their own transactions
+      - Used **bcrypt to hash passwords**
+          - Password are secured before storing in database
         
  - Validated and sanitized inputs in the backend using **Joi** Library
       - It prevents bad data from being saved
 
- - Used **bcrypt to hash passwords**
-      - Password are secured before storing in database
 
 ### Threat at website which I have not mitigated:
 
