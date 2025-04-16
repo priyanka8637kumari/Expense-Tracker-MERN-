@@ -22,7 +22,7 @@ function TransactionList({ transactions, deleteTransaction, setEditTransaction }
           <div className="flex gap-2">
           <button
             onClick={() => deleteTransaction(transaction._id)}
-            className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="text-red-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
             title="Delete your entry"
             aria-label="Delete transaction"
           >
