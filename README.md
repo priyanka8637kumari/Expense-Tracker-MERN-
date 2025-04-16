@@ -7,7 +7,6 @@
 - **Frontend**: React, Vite, Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
-- **Authentication**: js-token
 
 ## Features
 
