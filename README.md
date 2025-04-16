@@ -116,7 +116,7 @@ Tracking is implemented in compliance with **GDPR** and other privacy regulation
 ### Threat at website which I have not mitigated:
 
   **To securely store sensitive data**: First I used local storage and then js-cookie to store my userId. I am rendering user names in my frontend, Which is vulnerable to XSS attacks. Instead, there is one method to do it securely:
-   - By using HTTP-only cookies
+   - By using HTTP-only cookies: It makes cookies inaccessible to client-side JavaScript, which helps in reducing the risk of theft through cross-site scripting (XSS).
   
 
 
