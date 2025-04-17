@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
 function TransactionList({ transactions, deleteTransaction, setEditTransaction }) {
   // Function to format the date
@@ -26,15 +26,15 @@ function TransactionList({ transactions, deleteTransaction, setEditTransaction }
             title="Delete your entry"
             aria-label="Delete transaction"
           >
-            <FaTrash />
+            <FiTrash2 />
           </button>
           <button
             onClick={() => setEditTransaction(transaction)}
-            className="text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="text-yellow-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             title="Edit your entry"
             aria-label="Edit transaction"
           >
-            <FaEdit />
+            <FiEdit />
           </button>
           </div>
           <div>{transaction.text}</div>
