@@ -6,7 +6,7 @@ const createTransaction = async (req, res) => {
   try {
     const { userId, text, amount } = req.body;
 
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId); // Find the user by using userId
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -38,7 +38,7 @@ const createTransaction = async (req, res) => {
 const getTransactions = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const user = await userModel.findById(userId).populate("transactions");
+    const user = await userModel.findById(userId).populate("transactions"); // query with userId
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -59,7 +59,7 @@ const deleteTransaction = async (req, res) => {
   try {
     const { userId, transactionId } = req.body;
 
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId); // Find the user by using userId
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -88,7 +88,7 @@ const updateTransaction = async (req, res) => {
   try {
     const { userId, transactionId, text, amount } = req.body;
 
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId); // Find the user by using userId
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

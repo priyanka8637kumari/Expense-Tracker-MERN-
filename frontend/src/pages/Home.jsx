@@ -60,14 +60,16 @@ function Home() {
   //Adding a new transaction to the logged-in user's transactions.
   const addTransaction = async (transaction) => {
     try {
-      const userId = Cookies.get("userId");
+      const userId = Cookies.get("userId"); // retrieving the userId from cookies
+
       const url = `${import.meta.env.VITE_API_BASE_URL}/transactions`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 
         },
-        body: JSON.stringify({ userId, ...transaction }),
+        body: JSON.stringify({ userId, ...transaction }),// sending the userId in the request body
+        
       });
       const data = await response.json();
 

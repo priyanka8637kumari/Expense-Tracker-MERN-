@@ -15,7 +15,7 @@ const transactionSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Users",
+    ref: "Users", // Reference to the Users collection
     required: true,
   },
 });

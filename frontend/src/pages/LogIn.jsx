@@ -45,7 +45,8 @@ function LogIn() {
         // Setting cookies for logged in user and userId
         Cookies.set("loggedInUser", name, { secure: true, sameSite: "Strict" });
         Cookies.set("userId", userId, { secure: true, sameSite: "Strict" });
-
+       //---------------------------
+       
         setTimeout(() => {
           navigate("/home");
         }, 1000);

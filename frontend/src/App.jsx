@@ -17,6 +17,7 @@ function App() {
     trackPageView(window.location.pathname);
   }, []);
 
+  // Handle logout function
   const handleLogOut = () => {
     Cookies.remove("loggedInUser");
     Cookies.remove("userId");
