@@ -4,9 +4,12 @@
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React, Vite, Tailwind CSS
+- **Frontend**: React.js, Vite, Tailwind CSS, React Router, React icons
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
+- **Authentication**: bcrypt, CORS, dotenv
+- **Session Management**: js-cookie
+- **Validation**: Joi
 
 ## Features
 
@@ -72,7 +75,7 @@ Now visit: http://localhost:5173
 
 # ♿ A11y and SEO
  ## Accessibility and SEO at Moneymate website:
-- I have used **semantic html** to define proper structure
+- Used **semantic html** to define proper structure (header, main, nav, button form etc)
 - Added **ARIA attributes** and provided alternative text for images with alt attribute
 - Ensured **keyboard navigation** and provided visible **focus indicators** (focus:outline-none focus:ring-2 focus:ring-orange-500)
 - Provided **label** elements for form inputs to make accessible forms
@@ -81,7 +84,9 @@ Now visit: http://localhost:5173
 ```bash
   <meta name="description" content="Track your income and expenses effortlessly with our Expense Tracker app. Manage your finances with ease." />
 ```
-- Meets WCAG 2.1 AA standards for color contrast
+- Following the standards and having sufficient **contrast** between text and background
+- Descriptive and meaningfull page title
+- Clean URL structures via React Router (e.g., /login, /signup, /home)
 
 
 # 📊 Tracking
@@ -110,12 +115,20 @@ Tracking is implemented in compliance with **GDPR** and other privacy regulation
         
  - Validated and sanitized inputs in the backend using **Joi** Library
       - It prevents bad data from being saved
+      - Used during login, signup, creating and updating transactions
 
 
 ### Threat at website which I have not mitigated:
 
-  **To securely store sensitive data**: First I used local storage and then js-cookie to store my userId. I am rendering user names in my frontend, Which is vulnerable to XSS attacks. Instead, there is one method to do it securely:
-   - By using HTTP-only cookies: It makes cookies inaccessible to client-side JavaScript, which helps in reducing the risk of theft through cross-site scripting (XSS).
+  **To securely store sensitive data**: Currently at MoneyMate I am storing the username and userId in cookies using **js-cookie** after login, which creates a potential **security risk**. Storing user identifiers in plain cookies without encryption introduces several vulnerabilities.
+  
+  **To resolve this issue and strengthen security in future updates**: 
+  - HTTP-only cookies will be implemented:
+     - It is morden and more secure way of authentication
+     - It helps to protect from XSS attacks, since client-side javascript can not access HTTP-only cookies
+  
+  
+  
   
 
 
