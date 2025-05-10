@@ -14,6 +14,10 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Expense Tracker API');
+});
 app.use("/api/users", userRouter); // Route for user-related operations
 app.use("/api/transactions", transactionRouter); // Route for transaction-related operations
 
