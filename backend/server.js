@@ -12,7 +12,10 @@ configDotenv();
 const PORT = process.env.PORT || 5001;
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://moneymate4u.netlify.app/',
+  credentials: true,
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
