@@ -68,6 +68,7 @@ function Home() {
         headers: {
           "Content-Type": "application/json", 
         },
+        credentials: "include", // Include cookies in the request
         body: JSON.stringify({ userId, ...transaction }),// sending the userId in the request body
         
       });
@@ -92,6 +93,7 @@ function Home() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // Include cookies in the request
         body: JSON.stringify({ userId, transactionId }),
       });
       const data = await response.json();
@@ -116,6 +118,7 @@ function Home() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // Include cookies in the request
         body: JSON.stringify({ userId, transactionId, ...updatedTransaction }),
       });
       const data = await response.json();
